@@ -1,10 +1,10 @@
-// Replace with your actual API keys (store them securely in an environment variable)
-const WEATHER_API_KEY = 'your-weather-api-key';
-const AIRVISUAL_API_KEY = 'your-airvisual-api-key';
+// Replace with your actual API keys
+const WEATHER_API_KEY = '0334bc4b668876556bfb25024b710121';
+const AIRVISUAL_API_KEY = 'e47e394d-528f-4554-bee3-14b4b194dd91';
 let forecastChart;
 
 async function getWeatherData() {
-  const city = document.getElementById("cityInput").value.trim();
+  const city = document.getElementById("cityInput").value;
   if (!city) {
     alert("Please enter a city name.");
     return;
@@ -105,19 +105,14 @@ function updateAQIUI(data) {
 }
 
 function updateForecastChart(data) {
-  const dailyTemps = [];
-  const seenDates = new Set();
+  const dailyTemps = data.list
+    .filter((item, index) => index % 8 === 0)
+    .slice(0, 5);
 
-  data.list.forEach(item => {
-    const date = new Date(item.dt * 1000).toLocaleDateString("en-US", { weekday: "short" });
-    if (!seenDates.has(date)) {
-      seenDates.add(date);
-      dailyTemps.push({ date, temp: Math.round(item.main.temp) });
-    }
-  });
-
-  const labels = dailyTemps.slice(0, 5).map(item => item.date);
-  const temperatures = dailyTemps.slice(0, 5).map(item => item.temp);
+  const labels = dailyTemps.map(item =>
+    new Date(item.dt * 1000).toLocaleDateString("en-US", { weekday: "short" })
+  );
+  const temperatures = dailyTemps.map(item => Math.round(item.main.temp));
 
   if (forecastChart) {
     forecastChart.destroy();
