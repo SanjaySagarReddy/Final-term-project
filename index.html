@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Weather & Air Quality Dashboard</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Weather & Air Quality Dashboard</h1>
+    <div class="search-box">
+      <input type="text" id="cityInput" placeholder="Enter city name">
+      <button onclick="getWeatherData()">Search</button>
+    </div>
+    
+    <div class="weather-container">
+      <div class="current-weather">
+        <h2>Current Weather</h2>
+        <div id="weatherInfo">
+          <div id="temperature"></div>
+          <div id="description"></div>
+          <div id="humidity"></div>
+          <div id="wind"></div>
+        </div>
+      </div>
+      
+      <div class="air-quality">
+        <h2>Air Quality</h2>
+        <div id="aqiInfo">
+          <div id="aqiValue"></div>
+          <div id="aqiDescription"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="forecast">
+      <h2>5-Day Temperature Forecast</h2>
+      <canvas id="forecastChart"></canvas>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
